@@ -50,7 +50,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          platforms: linux/arm64
-          file: ./requirements/Dockerfile
+          file: ./requirements/Dockerfile.V100
           push: true
-          tags: nasanccs/vhr-cloudmask.pytorch:latest-arm
+          tags: nasanccs/vhr-cloudmask.pytorch:latest
