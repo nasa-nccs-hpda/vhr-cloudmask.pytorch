@@ -1,0 +1,45 @@
+inference_save_dir: /home/${oc.env:USER}/.vhr-cloudmask/outputs
+
+# test classes definition for validation
+test_classes:
+  - 'no-cloud'
+  - 'thick-cloud'
+  - 'thin-cloud'
+  - 'cloud-shadow'
+
+# resolution expected by omni cloudmask
+resample_res: 10.0
+
+# band order expected from TOA imagery
+band_order:
+  - 3
+  - 2
+  - 4
+
+# dtype of inference output
+inference_dtype: "bf16"
+
+# nodata value of inference output
+no_data_value: -10001
+
+# inference device
+inference_device: 'cuda'
+
+# mosaic device
+mosaic_device: 'cpu'
+
+# overwrite output files
+overwrite: False
+
+# prediction batch size
+batch_size: 1
+
+# rewrite default output to be COG
+prediction_driver: 'COG'
+
+# postprocessing settings
+postprocessing_steps:
+  - 'sieve'
+  - 'smooth'
+  - 'fill'
+  - 'dilate'

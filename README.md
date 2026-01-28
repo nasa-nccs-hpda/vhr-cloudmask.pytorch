@@ -16,7 +16,7 @@ of uid issues (this is the case of NCCS Explore). For that case you can build a 
 command. Depending the filesystem, this can take between 5 minutes to an hour.
 
 ```bash
-singularity build --sandbox vhr-cloudmask.pytorch docker://nasanccs/vhr-cloudmask.pytorch:latest
+singularity build --sandbox /lscratch/jacaraba/container/vhr-cloudmask.pytorch docker://nasanccs/vhr-cloudmask.pytorch:latest
 ```
 
 If you have done this step, you can skip the Installation step since the containers already
@@ -31,3 +31,5 @@ an operational pipeline to feed into the vhr-toolkit. For now, to run the curren
 ```bash
 PYTHONPATH="/explore/nobackup/people/jacaraba/development/vhr-cloudmask.pytorch/OmniCloudMask" python test_omnicloudmask.py
 ```
+
+singularity shell --nv --env PYTHONPATH=/explore/nobackup/people/$USER/development/VHR-TOOLKIT-FRAMEWORK/vhr-cloudmask.pytorch -B $NOBACKUP,/explore/nobackup/people,/explore/nobackup/projects,/css,/nfs4m /lscratch/jacaraba/container/vhr-cloudmask.pytorch
