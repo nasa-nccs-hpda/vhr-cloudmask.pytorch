@@ -8,8 +8,25 @@ FROM ${FROM_IMAGE}:${VERSION_DATE}-py3
 ENV CPLUS_INCLUDE_PATH="/usr/include/gdal"
 ENV C_INCLUDE_PATH="/usr/include/gdal"
 
+# 1) Add UbuntuGIS PPA (for GDAL 3.8.x on Ubuntu 22.04)
 RUN apt-get update && \
-    apt-get install -y binutils libproj-dev gdal-bin libgdal-dev
+    apt-get install -y --no-install-recommends software-properties-common ca-certificates && \
+    add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable && \
+    apt-get update
+
+#RUN apt-get update && \
+#    apt-get install -y binutils libproj-dev gdal-bin libgdal-dev
+
+# 2) Install GDAL from that PPA
+RUN apt-get install -y --no-install-recommends \
+      binutils \
+      libproj-dev \
+      gdal-bin \
+      libgdal-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# (Optional) sanity check: should show 3.8.x
+RUN gdalinfo --version && ogrinfo --version
 
 # Pip
 #--ignore-installed
