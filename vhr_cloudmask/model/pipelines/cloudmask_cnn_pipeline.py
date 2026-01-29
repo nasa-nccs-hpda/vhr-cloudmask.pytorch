@@ -258,6 +258,16 @@ class CloudMaskPipeline(object):
                 with torch.no_grad():
                     torch.cuda.empty_cache()
 
+                # rename output filename
+                output_filename_path = Path(output_filename[0])
+                new_name = re.sub(
+                    r"[_-]?OCM.*$", "_cloudmask.tif",
+                    output_filename_path.name
+                )
+
+                output_filename_path.rename(
+                    output_filename_path.with_name(new_name))
+
                 # apply default postprocessing
                 # prediction = self.postprocessing(
                 #    prediction, self.conf.postprocessing_steps)
